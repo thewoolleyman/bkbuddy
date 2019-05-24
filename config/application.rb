@@ -19,8 +19,10 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
 module Bkbuddy
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
@@ -33,3 +35,6 @@ module Bkbuddy
     config.generators.system_tests = nil
   end
 end
+
+ENV['OKTA_CLIENT_SECRET'] ||= Rails.application.credentials.OKTA_CLIENT_SECRET!
+

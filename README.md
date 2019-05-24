@@ -19,9 +19,12 @@
 # Development
 
 * Secrets
+  * ***IMPORTANT: NEVER SET A PRODUCTION SECRET VIA `credentials:edit`, E.G. DB PASSWORDS, API KEYS.  USE ENV VARS!***
+  * See `bin/rails credentials:help` and https://blog.eq8.eu/til/rails-52-credentials-tricks.html for more details
   * See `bkbuddy` secure note in LastPass
-  * Create `config/master.key` from value in LastPass
+  * For local workstations, create `config/master.key` from value in LastPass
   * Edit credentials with `EDITOR="mate --wait" bin/rails credentials:edit` (or another editor)
+  * Set RAILS_MASTER_KEY on deployed environments
 
 * Ruby version
   * Use rbenv/ruby-build via brew
