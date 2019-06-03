@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
-  skip_before_action :load_user_from_session
+  skip_before_action :ensure_logged_in
+
+  def new
+    redirect_to root_path if @user
+  end
 
   def destroy
     session[:oktastate] = nil

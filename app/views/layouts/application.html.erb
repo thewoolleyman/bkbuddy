@@ -13,11 +13,11 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div>
-      <% if !session[:oktastate] %>
-        <span><%= link_to "Sign In", user_oktaoauth_omniauth_authorize_path %></span>
-      <% else %>
-        <span><%= session[:oktastate][:info][:name] %></span>
+      <% if @user %>
+        <span><%= session[:oktastate][:name] %></span>
         <span><%= link_to "logout", ENV['OKTA_URL'] + "/login/signout?fromURI=" + request.base_url + "/logout" %></span>
+      <% else %>
+        <span><%= link_to "Sign In", user_oktaoauth_omniauth_authorize_path %></span>
       <% end %>
     </div>
     <%= yield %>
