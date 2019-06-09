@@ -19,7 +19,8 @@
 # Development
 
 * Secrets
-  * ***IMPORTANT: NEVER SET A PRODUCTION SECRET VIA `credentials:edit`, E.G. DB PASSWORDS, API KEYS.  USE ENV VARS!***
+  * ***IMPORTANT: NEVER SET A PRODUCTION SECRET VIA `credentials:edit`, E.G. DB PASSWORDS, SENSITIVE API KEYS.  USE ENV VARS!***
+  * Note that some API keys may be stored, however, because they are needed in dev/test as well as prod.  E.g. the Buildkite API key.
   * See `bin/rails credentials:help` and https://blog.eq8.eu/til/rails-52-credentials-tricks.html for more details
   * See `bkbuddy` secure note in LastPass
   * For local workstations, create `config/master.key` from value in LastPass
