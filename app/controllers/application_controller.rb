@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   private
 
   def load_user_from_session
-    @user = session[:oktastate]&.symbolize_keys!
+    if Rails.env.test?
+      @user = $test_fixture_user
+    else
+      @user = session[:oktastate]&.symbolize_keys!
+    end
   end
 
   def ensure_logged_in
