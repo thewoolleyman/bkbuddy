@@ -1,50 +1,10 @@
-import {
-  CABLECAR_CONNECTED,
-  CABLECAR_DISCONNECTED,
-  SERVER_UPDATE_SYSTEM_STATE,
-  SystemActionTypes,
-  SystemState,
-  UPDATE_SYSTEM_STATE,
-} from './types'
+import {createActionCreator, createReducer} from 'deox'
+import {initialState, SystemState} from './state'
+import {cablecarConnected, cablecarDisconnected, serverUpdateSystemState, updateSystemState} from './actions'
 
-const initialState: SystemState = {
-  loggedIn: false,
-  bkApiToken: '',
-  userName: '',
-  connected: false,
-}
-
-export function systemReducer(
-  state = initialState,
-  action: SystemActionTypes
-): SystemState {
-  switch (action.type) {
-    case CABLECAR_CONNECTED:
-      return {
-        ...state,
-        connected: true
-      }
-
-    case CABLECAR_DISCONNECTED:
-      return {
-        ...state,
-        connected: false
-      }
-
-    case SERVER_UPDATE_SYSTEM_STATE: {
-      return {
-        ...state,
-      }
-    }
-
-    case UPDATE_SYSTEM_STATE: {
-      return {
-        ...state,
-        ...action.payload
-      }
-    }
-
-    default:
-      return state
-  }
-}
+export const systemReducer = createReducer(initialState, handleAction => [
+  handleAction(cablecarConnected, state => ({...state, connected: true})),
+  handleAction(cablecarDisconnected, state => ({...state, connected: false})),
+  handleAction(serverUpdateSystemState, _ => _),
+  handleAction(updateSystemState, (_, {payload: payload}) => payload),
+])

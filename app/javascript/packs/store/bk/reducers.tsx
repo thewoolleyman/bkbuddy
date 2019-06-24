@@ -1,20 +1,7 @@
-import {BkActionTypes, BkState, PIPELINES_FETCHED,} from './types'
+import {createReducer} from 'deox'
+import {initialState} from './state'
+import {pipelinesFetchAll} from './actions/pipelinesFetchAll'
 
-const initialState: BkState = {
-  pipelines: [],
-}
-
-export function bkReducer(
-  state = initialState,
-  action: BkActionTypes
-): BkState {
-  switch (action.type) {
-    case PIPELINES_FETCHED:
-      return {
-        ...state,
-        pipelines: action.payload,
-      }
-    default:
-      return state
-  }
-}
+export const bkReducer = createReducer(initialState, handleAction => [
+  handleAction(pipelinesFetchAll.complete, (state, {payload}) => ({...state, pipelines: payload})),
+])

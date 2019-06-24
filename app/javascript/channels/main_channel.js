@@ -1,6 +1,6 @@
-import consumer from "./consumer"
+import consumer from './consumer'
 
-consumer.subscriptions.create("MainChannel", {
+consumer.subscriptions.create('MainChannel', {
   connected() {
     // Called when the subscription is ready for use on the server
   },

@@ -1,17 +1,22 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {AppState} from '../store'
+import {
+  BkState,
+  pipelinesFetchAll,
+  RootState,
+  SystemState,
+  UiState,
+} from '../store'
+import {bindActionCreators} from 'redux'
 
-import {SystemState} from '../store/system/types'
-import {BkState} from '../store/bk/types'
-import {pipelinesFetch} from '../store/bk/actions'
-
-interface AppProps {
-  cablecar: any
-  system: SystemState
-  bk: BkState
-  pipelinesFetch: typeof pipelinesFetch
+export type AppStateProps = {
+  bk: BkState,
+  system: SystemState,
+  ui: UiState,
 }
+export type AppDispatchProps = ReturnType<typeof mapDispatchToProps>
+
+export type AppProps = AppStateProps & AppDispatchProps
 
 function App(props: AppProps) {
   return (
@@ -20,7 +25,9 @@ function App(props: AppProps) {
         {props.system.userName} -{props.system.bkApiToken}
       </h1>
       <div>
-        <button onClick={() => props.pipelinesFetch()}>Read pipelines from Buildkite</button>
+        <button id='pipelines-fetch-all' onClick={props.pipelinesFetchAll} disabled={props.ui.fetchingAllPipelines}>
+          {props.ui.fetchingAllPipelines ? 'fetching...' : 'Read pipelines from Buildkite'}
+        </button>
         <ul>
           {
             props.bk.pipelines.map((pipeline) =>
@@ -33,12 +40,25 @@ function App(props: AppProps) {
   )
 }
 
-const mapStateToProps = (state: AppState) => ({
-  system: state.system,
+const mapStateToProps = (state: RootState) => ({
   bk: state.bk,
+  system: state.system,
+  ui: state.ui,
 })
 
-export default connect(
+function mapDispatchToProps(dispatch: any) {
+  return bindActionCreators(
+    {
+      pipelinesFetchAll,
+    },
+    dispatch
+  )
+}
+
+export default connect<AppStateProps,
+  AppDispatchProps,
+  {},
+  RootState>(
   mapStateToProps,
-  {pipelinesFetch}
+  mapDispatchToProps,
 )(App)
