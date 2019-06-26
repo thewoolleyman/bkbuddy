@@ -9,14 +9,12 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <!-- not currently using the alert and notice, if needed they will need to be passed into react layout -->
+    <!-- <p class="notice"><%#= notice %></p>-->
+    <!-- <p class="alert"><%#= alert %></p>-->
     <div>
-      <% if @user %>
-        <span><%= @user.fetch(:name) %></span>
-        <span><%= link_to "logout", ENV['OKTA_URL'] + "/login/signout?fromURI=" + request.base_url + "/logout" %></span>
-      <% else %>
-        <span><%= link_to "Sign In", user_oktaoauth_omniauth_authorize_path %></span>
+      <% unless @user %>
+        <h1><%= link_to "Sign In", user_oktaoauth_omniauth_authorize_path %></h1>
       <% end %>
     </div>
     <%= yield %>

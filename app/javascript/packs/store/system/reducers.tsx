@@ -1,5 +1,5 @@
-import {createActionCreator, createReducer} from 'deox'
-import {initialState, SystemState} from './state'
+import {createReducer} from 'deox'
+import {initialState} from './state'
 import {cablecarConnected, cablecarDisconnected, serverUpdateSystemState, updateSystemState} from './actions'
 
 export const systemReducer = createReducer(initialState, handleAction => [

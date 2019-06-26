@@ -1,4 +1,6 @@
 class MainChannel < ApplicationCable::Channel
+  include ActionView::Helpers::UrlHelper
+
   def subscribed
     stream_from private_queue
     stream_from "main"
@@ -14,9 +16,9 @@ class MainChannel < ApplicationCable::Channel
           {
               type: "UPDATE_SYSTEM_STATE",
               payload: {
-                  loggedIn: true,
                   bkApiToken: Rails.application.credentials.BUILDKITE_API_TOKEN!,
-                  userName: user.fetch(:email),
+                  userName: user.fetch(:name),
+                  logoutLink: url_for(ENV['OKTA_URL'] + "/login/signout?fromURI=" + connection.env['HTTP_ORIGIN'] + "/logout"),
                   connected: true,
               }
           }

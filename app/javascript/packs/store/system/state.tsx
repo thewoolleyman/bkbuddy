@@ -1,14 +1,14 @@
 export interface SystemState {
-  loggedIn: boolean
   bkApiToken: string
   userName: string
+  logoutLink: string
   connected: boolean
 }
 
 export const initialState: SystemState = {
-  loggedIn: false,
   bkApiToken: '',
   userName: '',
+  logoutLink: '',
   connected: false,
 }
 

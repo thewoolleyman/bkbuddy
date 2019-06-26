@@ -1,41 +1,41 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {
-  BkState,
-  pipelinesFetchAll,
-  RootState,
-  SystemState,
-  UiState,
-} from '../store'
-import {bindActionCreators} from 'redux'
+import {BkState, RootState, SystemState, UiState,} from '../store'
+import PipelineChooser from './PipelineChooser'
+import {Alignment, AnchorButton, Classes, Navbar, NavbarDivider, NavbarGroup, NavbarHeading} from '@blueprintjs/core'
+
+import 'normalize.css'
+import '@blueprintjs/core/lib/css/blueprint.css'
+import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 
 export type AppStateProps = {
   bk: BkState,
   system: SystemState,
   ui: UiState,
 }
-export type AppDispatchProps = ReturnType<typeof mapDispatchToProps>
-
-export type AppProps = AppStateProps & AppDispatchProps
+export type AppProps = AppStateProps
 
 function App(props: AppProps) {
   return (
     <div>
+      <Navbar className={Classes.DARK}>
+        <NavbarGroup align={Alignment.LEFT}>
+          <NavbarHeading>{props.system.userName}</NavbarHeading>
+        </NavbarGroup>
+        <NavbarGroup align={Alignment.RIGHT}>
+          <AnchorButton
+            href={props.system.logoutLink}
+            text="Sign Out"
+            target="_blank"
+            minimal
+            rightIcon="log-out"
+          />
+        </NavbarGroup>
+      </Navbar>
       <h1>
         {props.system.userName} -{props.system.bkApiToken}
       </h1>
-      <div>
-        <button id='pipelines-fetch-all' onClick={props.pipelinesFetchAll} disabled={props.ui.fetchingAllPipelines}>
-          {props.ui.fetchingAllPipelines ? 'fetching...' : 'Read pipelines from Buildkite'}
-        </button>
-        <ul>
-          {
-            props.bk.pipelines.map((pipeline) =>
-              <li key={pipeline.uuid}>{pipeline.uuid} - {pipeline.name}</li>
-            )
-          }
-        </ul>
-      </div>
+      <PipelineChooser/>
     </div>
   )
 }
@@ -46,19 +46,10 @@ const mapStateToProps = (state: RootState) => ({
   ui: state.ui,
 })
 
-function mapDispatchToProps(dispatch: any) {
-  return bindActionCreators(
-    {
-      pipelinesFetchAll,
-    },
-    dispatch
-  )
-}
-
 export default connect<AppStateProps,
-  AppDispatchProps,
+  {},
   {},
   RootState>(
   mapStateToProps,
-  mapDispatchToProps,
+  {},
 )(App)
