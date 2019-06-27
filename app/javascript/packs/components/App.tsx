@@ -8,6 +8,8 @@ import 'normalize.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 
+import './app.css'
+
 export type AppStateProps = {
   bk: BkState,
   system: SystemState,
@@ -18,7 +20,7 @@ export type AppProps = AppStateProps
 function App(props: AppProps) {
   return (
     <div>
-      <Navbar className={Classes.DARK}>
+      <Navbar id='navbar' className={Classes.DARK}>
         <NavbarGroup align={Alignment.LEFT}>
           <NavbarHeading>{props.system.userName}</NavbarHeading>
         </NavbarGroup>
@@ -32,9 +34,6 @@ function App(props: AppProps) {
           />
         </NavbarGroup>
       </Navbar>
-      <h1>
-        {props.system.userName} -{props.system.bkApiToken}
-      </h1>
       <PipelineChooser/>
     </div>
   )
