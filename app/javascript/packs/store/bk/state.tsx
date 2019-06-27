@@ -4,10 +4,12 @@ export interface Pipeline {
 }
 
 export interface BkState {
+  monitoredPipelines: Pipeline[]
   pipelines: Pipeline[]
 }
 
-export const initialState: BkState = {
+export const defaultState: BkState = {
+  monitoredPipelines: [],
   pipelines: [],
 }
 

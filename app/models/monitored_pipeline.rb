@@ -1,0 +1,2 @@
+class MonitoredPipeline < ApplicationRecord
+end

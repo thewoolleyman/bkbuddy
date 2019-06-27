@@ -5,7 +5,7 @@ export interface SystemState {
   connected: boolean
 }
 
-export const initialState: SystemState = {
+export const defaultState: SystemState = {
   bkApiToken: '',
   userName: '',
   logoutLink: '',

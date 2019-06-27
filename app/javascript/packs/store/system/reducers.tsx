@@ -1,10 +1,10 @@
 import {createReducer} from 'deox'
-import {initialState} from './state'
-import {cablecarConnected, cablecarDisconnected, serverUpdateSystemState, updateSystemState} from './actions'
+import {defaultState} from './state'
+import {cablecarConnected, cablecarDisconnected, serverGetInitialState, setInitialSystemState} from './actions'
 
-export const systemReducer = createReducer(initialState, handleAction => [
+export const systemReducer = createReducer(defaultState, handleAction => [
   handleAction(cablecarConnected, state => ({...state, connected: true})),
   handleAction(cablecarDisconnected, state => ({...state, connected: false})),
-  handleAction(serverUpdateSystemState, _ => _),
-  handleAction(updateSystemState, (_, {payload: payload}) => payload),
+  handleAction(serverGetInitialState, _ => _),
+  handleAction(setInitialSystemState, (_, {payload: payload}) => payload),
 ])
