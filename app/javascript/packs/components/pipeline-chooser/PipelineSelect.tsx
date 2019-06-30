@@ -1,18 +1,17 @@
-import * as React from 'react'
-import {BkState, monitoredPipelineCreate, pipelinesFetchAll, RootState, UiState} from '../../store'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
 import {Button, MenuItem} from '@blueprintjs/core'
 import {ItemRenderer, Select} from '@blueprintjs/select'
-import {Pipeline} from '../../store'
+import * as React from 'react'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {BkState, monitoredPipelineCreate, Pipeline, pipelinesFetchAll, RootState, UiState} from '~/store'
 
-export type PipelineSelectStateProps = {
+type PipelineSelectStateProps = {
   bk: BkState,
   ui: UiState,
 }
-export type PipelineSelectDispatchProps = ReturnType<typeof mapDispatchToProps>
+type PipelineSelectDispatchProps = ReturnType<typeof mapDispatchToProps>
 
-export type PipelineSelectProps = PipelineSelectStateProps & PipelineSelectDispatchProps
+type PipelineSelectProps = PipelineSelectStateProps & PipelineSelectDispatchProps
 
 const BpPipelineSelect = Select.ofType<Pipeline>()
 

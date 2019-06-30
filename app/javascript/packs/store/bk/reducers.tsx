@@ -1,9 +1,6 @@
 import {createReducer} from 'deox'
+import {monitoredPipelineCreate, monitoredPipelineDelete, pipelinesFetchAll, setInitialBkState} from './actions'
 import {defaultState} from './state'
-import {setInitialBkState} from './actions/setInitialBkState'
-import {pipelinesFetchAll} from './actions/pipelinesFetchAll'
-import {monitoredPipelineCreate} from './actions/monitoredPipelineCreate'
-import {monitoredPipelineDelete} from './actions/monitoredPipelineDelete'
 
 export const bkReducer = createReducer(defaultState, handleAction => [
   handleAction(setInitialBkState, (state, {payload: payload}) => ({...state, ...payload})),

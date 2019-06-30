@@ -1,9 +1,9 @@
 import {applyMiddleware, createStore} from 'redux'
 import cablecar from 'redux-cablecar'
-import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 import {rootReducer} from './root'
-import {serverGetInitialState} from './system/actions'
+import {serverGetInitialState} from './system'
 
 export function configureStore() {
   const middlewares = [thunk, cablecar]

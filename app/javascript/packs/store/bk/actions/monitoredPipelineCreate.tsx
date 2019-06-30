@@ -1,6 +1,6 @@
 import {createActionCreator} from 'deox'
 import {Dispatch} from 'redux'
-import {Pipeline} from '../state'
+import {Pipeline} from '~/store'
 
 function _monitoredPipelineCreateThunk(uuid: string, name: string) {
   return (dispatch: Dispatch) => {

@@ -1,6 +1,6 @@
 import {createReducer} from 'deox'
-import {initialState} from './state'
 import {pipelinesFetchAll} from '..'
+import {initialState} from './state'
 
 export const uiReducer = createReducer(
   initialState,

@@ -8,7 +8,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es6",
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./app/javascript/packs",
+    "paths": {
+      "~/*": ["./*"]
+    }
   },
   "exclude": [
     "**/*.spec.ts",

@@ -1,12 +1,12 @@
+import {Alignment, AnchorButton, Classes, Navbar, NavbarGroup, NavbarHeading} from '@blueprintjs/core'
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {RootState, SystemState,} from '../../store'
-import {Alignment, AnchorButton, Classes, Navbar, NavbarGroup, NavbarHeading} from '@blueprintjs/core'
+import {RootState, SystemState,} from '~/store'
 
-export type HeaderStateProps = {
+type HeaderStateProps = {
   system: SystemState,
 }
-export type HeaderProps = HeaderStateProps
+type HeaderProps = HeaderStateProps
 
 function Header(props: HeaderProps) {
   return (

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import {Pipeline} from '../store'
+import {Pipeline} from '~/store'
 
 export async function getAllPipelines(bkApiToken: string): Promise<Pipeline[]> {
   axios.defaults.baseURL = 'https://graphql.buildkite.com'

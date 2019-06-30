@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux'
+import {bkReducer as bk} from './bk'
 
-import {systemReducer as system} from './system/reducers'
-import {bkReducer as bk} from './bk/reducers'
-import {uiReducer as ui} from './ui/reducers'
+import {systemReducer as system} from './system'
+import {uiReducer as ui} from './ui'
 
 
 export type RootState = ReturnType<typeof rootReducer>

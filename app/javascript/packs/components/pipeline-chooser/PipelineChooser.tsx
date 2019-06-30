@@ -1,7 +1,7 @@
+import {Collapse, Icon, Intent} from '@blueprintjs/core'
 import * as React from 'react'
 import {useState} from 'react'
 import PipelineSelect from './PipelineSelect'
-import {Collapse, Icon, Intent} from '@blueprintjs/core'
 
 function PipelineChooser() {
   const [open, setOpen] = useState(false)

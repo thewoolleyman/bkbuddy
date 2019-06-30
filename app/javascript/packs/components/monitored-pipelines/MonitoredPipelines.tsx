@@ -1,15 +1,15 @@
-import * as React from 'react'
-import {BkState, monitoredPipelineDelete, RootState} from '../../store'
-import {connect} from 'react-redux'
 import {Icon, Intent, UL} from '@blueprintjs/core'
+import * as React from 'react'
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import {BkState, monitoredPipelineDelete, RootState} from '~/store'
 
-export type MonitoredPipelinesStateProps = {
+type MonitoredPipelinesStateProps = {
   bk: BkState,
 }
-export type MonitoredPipelinesDispatchProps = ReturnType<typeof mapDispatchToProps>
+type MonitoredPipelinesDispatchProps = ReturnType<typeof mapDispatchToProps>
 
-export type MonitoredPipelinesProps = MonitoredPipelinesStateProps & MonitoredPipelinesDispatchProps
+type MonitoredPipelinesProps = MonitoredPipelinesStateProps & MonitoredPipelinesDispatchProps
 
 function MonitoredPipelines(props: MonitoredPipelinesProps) {
   return (

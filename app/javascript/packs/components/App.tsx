@@ -1,15 +1,14 @@
-import * as React from 'react'
-import {connect} from 'react-redux'
-import Header from './header/Header'
-import PipelineChooser from './pipeline-chooser/PipelineChooser'
-import MonitoredPipelines from './monitored-pipelines/MonitoredPipelines'
-
-import 'normalize.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
-import './app.css'
 
-function App() {
+import 'normalize.css'
+import * as React from 'react'
+import './app.css'
+import Header from './header/Header'
+import MonitoredPipelines from './monitored-pipelines/MonitoredPipelines'
+import PipelineChooser from './pipeline-chooser/PipelineChooser'
+
+export function App() {
   return (
     <div>
       <Header/>
@@ -18,5 +17,3 @@ function App() {
     </div>
   )
 }
-
-export default connect()(App)
