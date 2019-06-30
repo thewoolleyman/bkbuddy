@@ -12,6 +12,7 @@ class MainChannel < ApplicationCable::Channel
     case action["type"]
 
     when "SERVER_GET_INITIAL_STATE"
+      # noinspection RubyResolve
       ActionCable.server.broadcast(
         private_queue,
         {
@@ -62,6 +63,9 @@ class MainChannel < ApplicationCable::Channel
           }
         }
       )
+
+    else
+      raise "Invalid ActionCable action received: '#{action}'"
     end
   end
 

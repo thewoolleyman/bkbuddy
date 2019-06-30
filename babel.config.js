@@ -1,9 +1,9 @@
 module.exports = function(api) {
-  var validEnv = ['development', 'test', 'production']
-  var currentEnv = api.env()
-  var isDevelopmentEnv = api.env('development')
-  var isProductionEnv = api.env('production')
-  var isTestEnv = api.env('test')
+  const validEnv = ['development', 'test', 'production']
+  const currentEnv = api.env()
+  const isDevelopmentEnv = api.env('development')
+  const isProductionEnv = api.env('production')
+  const isTestEnv = api.env('test')
 
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
@@ -18,7 +18,7 @@ module.exports = function(api) {
   return {
     presets: [
       isTestEnv && [
-        require('@babel/preset-env').default,
+        require('@babel/preset-env'),
         {
           targets: {
             node: 'current'
@@ -26,7 +26,7 @@ module.exports = function(api) {
         }
       ],
       (isProductionEnv || isDevelopmentEnv) && [
-        require('@babel/preset-env').default,
+        require('@babel/preset-env'),
         {
           forceAllTransforms: true,
           useBuiltIns: 'entry',
@@ -44,36 +44,36 @@ module.exports = function(api) {
     ].filter(Boolean),
     plugins: [
       require('babel-plugin-macros'),
-      require('@babel/plugin-syntax-dynamic-import').default,
+      require('@babel/plugin-syntax-dynamic-import'),
       isTestEnv && require('babel-plugin-dynamic-import-node'),
-      require('@babel/plugin-transform-destructuring').default,
+      require('@babel/plugin-transform-destructuring'),
       [
-        require('@babel/plugin-proposal-class-properties').default,
+        require('@babel/plugin-proposal-class-properties'),
         {
           loose: true
         }
       ],
       [
-        require('@babel/plugin-proposal-object-rest-spread').default,
+        require('@babel/plugin-proposal-object-rest-spread'),
         {
           useBuiltIns: true
         }
       ],
       [
-        require('@babel/plugin-transform-runtime').default,
+        require('@babel/plugin-transform-runtime'),
         {
           helpers: false,
           regenerator: true
         }
       ],
       [
-        require('@babel/plugin-transform-regenerator').default,
+        require('@babel/plugin-transform-regenerator'),
         {
           async: false
         }
       ],
       isProductionEnv && [
-        require('babel-plugin-transform-react-remove-prop-types').default,
+        require('babel-plugin-transform-react-remove-prop-types'),
         {
           removeImport: true
         }

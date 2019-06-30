@@ -32,9 +32,11 @@ module Bkbuddy
     # the framework and any gems in your application.
 
     # Don't generate system test files.
+    # noinspection RubyResolve
     config.generators.system_tests = nil
   end
 end
 
+# noinspection RubyResolve
 ENV['OKTA_CLIENT_SECRET'] ||= Rails.application.credentials.OKTA_CLIENT_SECRET!
 

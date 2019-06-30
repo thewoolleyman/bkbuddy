@@ -1,4 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  # noinspection RailsParamDefResolve
   skip_before_action :ensure_logged_in
 
   def oktaoauth

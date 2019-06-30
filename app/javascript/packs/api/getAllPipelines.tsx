@@ -25,10 +25,8 @@ export async function getAllPipelines(bkApiToken: string): Promise<Pipeline[]> {
     {query: query},
   )
   // TODO: it's possible to destructure an array of nodes in the console with [{name, uuid}] = ..., why not here?
-  const pipelines = data.data.organization.pipelines.edges
+  return data.data.organization.pipelines.edges
     .map(edge => edge.node)
     .map(node => ({name: node.name, uuid: node.uuid}))
-  return pipelines
-
 }
 

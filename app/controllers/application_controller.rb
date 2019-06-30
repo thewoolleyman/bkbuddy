@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  # noinspection RubyResolve
   before_action :load_user_from_session
+  # noinspection RubyResolve
   before_action :ensure_logged_in
 
   private

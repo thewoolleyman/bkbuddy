@@ -17,6 +17,7 @@ $test_fixture_user = {
     :email_verified => true
 }
 
+# noinspection RubyResolve
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

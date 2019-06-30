@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>bkbuddy - Buildkite Buddy</title>
     <%= csrf_meta_tags %>
@@ -14,7 +14,12 @@
     <!-- <p class="alert"><%#= alert %></p>-->
     <div>
       <% unless @user %>
-        <h1><%= link_to "Sign In", user_oktaoauth_omniauth_authorize_path %></h1>
+        <h1>
+          <%=
+            # noinspection RubyResolve
+            link_to "Sign In", user_oktaoauth_omniauth_authorize_path
+          %>
+        </h1>
       <% end %>
     </div>
     <%= yield %>

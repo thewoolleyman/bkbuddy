@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Button, MenuItem} from '@blueprintjs/core'
 import {ItemRenderer, Select} from '@blueprintjs/select'
-import {Pipeline} from '../../store/bk/state'
+import {Pipeline} from '../../store'
 
 export type PipelineSelectStateProps = {
   bk: BkState,
