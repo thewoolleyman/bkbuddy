@@ -30,7 +30,7 @@ class MainChannel < ApplicationCable::Channel
         {
           type: "SET_INITIAL_BK_STATE",
           payload: {
-            monitoredPipelines: MonitoredPipeline.all
+            monitoredPipelines: MonitoredPipeline.order(:name).all
           }
         }
       )

@@ -1,4 +1,4 @@
-import {Icon, Intent, UL} from '@blueprintjs/core'
+import {Icon, Intent} from '@blueprintjs/core'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
@@ -15,7 +15,7 @@ function MonitoredPipelines(props: MonitoredPipelinesProps) {
   return (
     <div>
       <h3>2. Review Monitored Pipelines for Flaky Builds:</h3>
-      <UL>
+      <ul>
         {
           props.bk.monitoredPipelines.map((pipeline) =>
             <li className='monitored-pipeline' key={pipeline.uuid}>
@@ -26,7 +26,7 @@ function MonitoredPipelines(props: MonitoredPipelinesProps) {
             </li>
           )
         }
-      </UL>
+      </ul>
     </div>
   )
 }

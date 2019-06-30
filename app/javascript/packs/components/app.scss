@@ -1,0 +1,15 @@
+@import '../../../../node_modules/@blueprintjs/core/lib/scss/variables';
+
+$pt-navbar-height: 30px;
+@import '../../../../node_modules/@blueprintjs/core/src/blueprint';
+
+.#{$ns}-running-text {
+  h1, h2, h3, h4, h5 {
+    margin-top: $pt-grid-size * 1;
+    margin-bottom: $pt-grid-size * 1;
+  }
+}
+
+button {
+  margin: 3px;
+}

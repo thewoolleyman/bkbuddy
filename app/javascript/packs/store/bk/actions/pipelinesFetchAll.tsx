@@ -2,7 +2,7 @@ import {createActionCreator} from 'deox'
 import {Dispatch} from 'redux'
 
 import {getAllPipelines} from '~/api'
-import {Pipeline, RootState} from '~/store'
+import {Pipeline, RootState, sortPipelines} from '~/store'
 
 function _pipelinesFetchAllThunk() {
   return async (dispatch: Dispatch, getState: () => RootState) => {
@@ -10,7 +10,7 @@ function _pipelinesFetchAllThunk() {
 
     try {
       const pipelines = await getAllPipelines(getState().system.bkApiToken)
-      dispatch(pipelinesFetchAll.complete(pipelines))
+      dispatch(pipelinesFetchAll.complete(sortPipelines(pipelines)))
     } catch (error) {
       dispatch(pipelinesFetchAll.error(error))
     }
