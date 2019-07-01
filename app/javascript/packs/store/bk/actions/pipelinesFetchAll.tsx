@@ -2,7 +2,8 @@ import {createActionCreator} from 'deox'
 import {Dispatch} from 'redux'
 
 import {getAllPipelines} from '~/api'
-import {Pipeline, RootState, sortPipelines} from '~/store'
+import {Pipeline, RootState} from '~/store'
+import {sortPipelines} from '~/store/util'
 
 function _pipelinesFetchAllThunk() {
   return async (dispatch: Dispatch, getState: () => RootState) => {

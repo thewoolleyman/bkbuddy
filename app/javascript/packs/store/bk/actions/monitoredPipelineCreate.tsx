@@ -16,11 +16,13 @@ function _monitoredPipelineCreateThunk(slug: string, name: string) {
 export const monitoredPipelineCreate = Object.assign(_monitoredPipelineCreateThunk, {
   next: createActionCreator('MONITORED_PIPELINE_CREATE_NEXT'),
   server_action: createActionCreator(
-    'SERVER_MONITORED_PIPELINE_CREATE',
+    'SERVER_REQ_MONITORED_PIPELINE_CREATE',
     resolve => (slug: string, name: string) => resolve({slug, name}),
   ),
+  // SERVER_RESP actions are handled by redux-cablecar, so this is never invoked,
+  // it only exists to declare types.  See README.
   complete: createActionCreator(
-    'MONITORED_PIPELINE_CREATE_COMPLETE',
+    'SERVER_RESP_MONITORED_PIPELINE_CREATE_COMPLETE',
     resolve => (payload: { pipeline: Pipeline }) => resolve(payload)
   ),
   error: createActionCreator('MONITORED_PIPELINE_CREATE_ERROR', resolve => error =>

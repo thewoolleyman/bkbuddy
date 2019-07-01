@@ -27,6 +27,15 @@
 * [deox](https://deox.js.org/) to DRY up Redux
 * [blueprintjs](https://blueprintjs.com/) for layout/styling
 
+## Notes on interaction between `redux-cablecar` and `deox`
+
+* Actions prefixed with `SERVER_REQ` are automatically dispatched to ActionCable via `redux-cablecar`
+* Actions prefixed with `SERVER_RESP` are responses from ActionCable.  They will have
+  action creator executors defined via `deox`, but these executors are ***never invoked***,
+  because they are handled by `redux-cablecar`.  However, they are still *defined*, in
+  order to declare the types used in the corresponding reducers.  There may be a
+  cleaner/better way to do this... 
+
 # Development
 
 * Secrets

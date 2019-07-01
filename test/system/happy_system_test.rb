@@ -11,14 +11,20 @@ class HappySystemTest < ApplicationSystemTestCase
     assert_selector ".monitored-pipeline", text: "Tracker - Web" # existing, loaded from db
 
     # Sanity check that fixtures are being loaded to start with known state
-    refute_selector ".monitored-pipeline", text: "Gogator"
+    refute_selector ".monitored-pipeline", text: "Classico – Weekday Morning"
 
     # expand pipeline chooser
     find('div#pipeline-chooser', text: /choose new pipelines to monitor/i).click
 
     # add a new monitored pipeline (hits live Buildkite API)
     click_button text: /select a pipeline to monitor/i
-    find('a.pipeline-select-item', text: /Gogator/).click
-    assert_selector ".monitored-pipeline", text: "Gogator"
+    find('a.pipeline-select-item', text: /Classico – Weekday Morning/).click
+    assert_selector ".monitored-pipeline", text: "Classico – Weekday Morning"
+
+    # load steps
+    within('.monitored-pipeline', text: "Classico – Weekday Morning") do
+      find('.refreshSteps').click
+    end
+    assert_selector "li.step", text: "scripts/testing/browser"
   end
 end

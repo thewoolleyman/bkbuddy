@@ -1,4 +1,6 @@
 export {monitoredPipelineCreate} from './monitoredPipelineCreate'
 export {monitoredPipelineDelete} from './monitoredPipelineDelete'
+export {emojisFetch} from './emojisFetch'
 export {pipelinesFetchAll} from './pipelinesFetchAll'
-export {setInitialBkState} from './setInitialBkState'
+export {pipelineFetchSteps} from './pipelineFetchSteps'
+export {serverRespSetInitialBkState} from './serverRespSetInitialBkState'
