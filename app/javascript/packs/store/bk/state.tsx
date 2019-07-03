@@ -1,6 +1,6 @@
 export interface Pipeline {
   name: string
-  uuid: string
+  slug: string
 }
 
 export interface BkState {

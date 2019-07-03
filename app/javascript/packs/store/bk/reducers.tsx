@@ -14,6 +14,6 @@ export const bkReducer = createReducer(defaultState, handleAction => [
   handleAction(monitoredPipelineDelete.complete, (state, {payload: payload}) =>
     ({
       ...state,
-      monitoredPipelines: state.monitoredPipelines.filter((p) => p.uuid !== payload.uuid),
+      monitoredPipelines: state.monitoredPipelines.filter((p) => p.slug !== payload.slug),
     })),
 ])

@@ -22,7 +22,7 @@ const itemRenderer: ItemRenderer<Pipeline> = (pipeline, {handleClick, modifiers}
       className='pipeline-select-item'
       active={modifiers.active}
       disabled={modifiers.disabled}
-      key={pipeline.uuid}
+      key={pipeline.slug}
       onClick={handleClick}
       text={text}
     />
@@ -31,14 +31,14 @@ const itemRenderer: ItemRenderer<Pipeline> = (pipeline, {handleClick, modifiers}
 
 function PipelineSelect(props: PipelineSelectProps) {
   const unmonitoredPipelines = props.bk.pipelines.filter(
-    pipeline => !props.bk.monitoredPipelines.map(p => p.uuid).includes(pipeline.uuid)
+    pipeline => !props.bk.monitoredPipelines.map(p => p.slug).includes(pipeline.slug)
   )
   return (
     <BpPipelineSelect
       filterable={false}
       items={unmonitoredPipelines}
       itemRenderer={itemRenderer}
-      onItemSelect={(pipeline: Pipeline) => props.monitoredPipelineCreate(pipeline.uuid, pipeline.name)}
+      onItemSelect={(pipeline: Pipeline) => props.monitoredPipelineCreate(pipeline.slug, pipeline.name)}
       noResults={props.ui.fetchingAllPipelines ? 'fetching...' : 'No available pipelines'}
     >
       <Button

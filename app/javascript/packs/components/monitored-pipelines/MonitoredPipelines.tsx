@@ -18,9 +18,9 @@ function MonitoredPipelines(props: MonitoredPipelinesProps) {
       <ul>
         {
           props.bk.monitoredPipelines.map((pipeline) =>
-            <li className='monitored-pipeline' key={pipeline.uuid}>
-              {pipeline.uuid} - {pipeline.name} {' '}
-              <a onClick={() => props.monitoredPipelineDelete(pipeline.uuid)}>
+            <li className='monitored-pipeline' key={pipeline.slug}>
+              {pipeline.slug} - {pipeline.name} {' '}
+              <a onClick={() => props.monitoredPipelineDelete(pipeline.slug)}>
                 <Icon icon='trash' iconSize={16} intent={Intent.NONE}/>
               </a>
             </li>

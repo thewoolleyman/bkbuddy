@@ -38,7 +38,7 @@ class MainChannel < ApplicationCable::Channel
     when "SERVER_MONITORED_PIPELINE_CREATE"
       payload = action.fetch('payload')
       pipeline = MonitoredPipeline.create!(
-        uuid: payload.fetch('uuid'),
+        slug: payload.fetch('slug'),
         name: payload.fetch('name'),
       )
       ActionCable.server.broadcast(
@@ -52,14 +52,14 @@ class MainChannel < ApplicationCable::Channel
       )
 
     when "SERVER_MONITORED_PIPELINE_DELETE"
-      uuid = action.fetch('payload').fetch('uuid')
-      MonitoredPipeline.find(uuid).destroy!
+      slug = action.fetch('payload').fetch('slug')
+      MonitoredPipeline.find(slug).destroy!
       ActionCable.server.broadcast(
         private_queue,
         {
           type: "MONITORED_PIPELINE_DELETE_COMPLETE",
           payload: {
-            uuid: uuid,
+            slug: slug,
           }
         }
       )
