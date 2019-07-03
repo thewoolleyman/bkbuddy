@@ -16,6 +16,17 @@
   * `rails db:migrate`
   * `bin/setup`
 
+# Tech Stack
+
+* Rails
+* Mysql for DB
+* React + Redux frontend
+* ActionCable for client-server communication
+* [redux-cablecar](https://github.com/ndhays/redux-cablecar) to wire ActionCable into Redux
+* Typescript
+* [deox](https://deox.js.org/) to DRY up Redux
+* [blueprintjs](https://blueprintjs.com/) for layout/styling
+
 # Development
 
 * Secrets
@@ -32,12 +43,13 @@
   * rbenv install 2.6.3
 
 * System dependencies
-  * Postgresql
-  * Redis (for actioncable)
+  * Mysql
+  * Redis (only on server for actioncable, dev uses default built-in async subscription adapter)
   * Node
   * Yarn
 
-TODO: (from default Rails readme)
+
+# TODO: (bullet items from default Rails readme)
 
 * Configuration
 
