@@ -12,7 +12,8 @@
     "baseUrl": "./app/javascript/packs",
     "paths": {
       "~/*": ["./*"]
-    }
+    },
+    "noEmit": true
   },
   "exclude": [
     "**/*.spec.ts",
