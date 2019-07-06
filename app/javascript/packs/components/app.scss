@@ -10,9 +10,14 @@ $pt-navbar-height: 30px;
   }
 }
 
+.code {
+  font-family: "Lucida Console", Monaco, monospace
+}
+
 img.emoji {
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
+  padding: 1px;
 }
 
 button {

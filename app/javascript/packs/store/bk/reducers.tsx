@@ -1,5 +1,5 @@
 import {createReducer} from 'deox'
-import {sortPipelines} from '~/store/util'
+import {sortPipelines} from '~/util'
 import {
   emojisFetch,
   monitoredPipelineCreate,

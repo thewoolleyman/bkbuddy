@@ -3,7 +3,7 @@ import {Dispatch} from 'redux'
 
 import {getAllPipelines} from '~/api'
 import {Pipeline, RootState} from '~/store'
-import {sortPipelines} from '~/store/util'
+import {sortPipelines} from '~/util'
 
 function _pipelinesFetchAllThunk() {
   return async (dispatch: Dispatch, getState: () => RootState) => {

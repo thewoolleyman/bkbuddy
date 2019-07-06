@@ -12,5 +12,4 @@ export {
 } from './bk'
 export {UiState} from './ui'
 // needs to be last
-export {configureStore} from './configure-store'
-export {stepsForPipeline} from './util'
+export {configureStore} from './configureStore'
