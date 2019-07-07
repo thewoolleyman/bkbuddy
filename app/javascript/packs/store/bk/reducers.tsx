@@ -11,7 +11,7 @@ import {
 import {defaultState} from './state'
 
 export const bkReducer = createReducer(defaultState, handleAction => [
-  handleAction(serverRespSetInitialBkState, (state, {payload: payload}) => ({...state, ...payload})),
+  handleAction(serverRespSetInitialBkState, (_, {payload}) => payload),
   handleAction(emojisFetch.complete, (state, {payload}) => ({...state, emojis: payload})),
   handleAction(pipelinesFetchAll.complete, (state, {payload}) => ({...state, pipelines: payload})),
   handleAction(pipelineFetchSteps.complete, (state, {payload}) => {
@@ -28,12 +28,12 @@ export const bkReducer = createReducer(defaultState, handleAction => [
       steps: state.steps.concat(newSteps)
     })
   }),
-  handleAction(monitoredPipelineCreate.complete, (state, {payload: payload}) =>
+  handleAction(monitoredPipelineCreate.complete, (state, {payload}) =>
     ({
       ...state,
       monitoredPipelines: sortPipelines([...state.monitoredPipelines, payload.pipeline])
     })),
-  handleAction(monitoredPipelineDelete.complete, (state, {payload: payload}) =>
+  handleAction(monitoredPipelineDelete.complete, (state, {payload}) =>
     ({
       ...state,
       monitoredPipelines: state.monitoredPipelines.filter((p) => p.slug !== payload.slug),

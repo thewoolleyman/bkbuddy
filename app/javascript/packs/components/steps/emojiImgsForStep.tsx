@@ -6,6 +6,10 @@ function emojiImg(emojiSrc, label, emojiText) {
 
 export function emojiImgsForStep(step, emojis) {
   const label = step.label
+  if (!emojis) {
+    // If emojis URLs are not yet loaded from async call to BK api, return a placeholder image
+    return ([emojiImg('https://buildkiteassets.com/emojis/img-apple-64/23f3.png', label, 'loading...')])
+  }
   // NOTE: Only supports up to four emojis.  Supporting an arbitrary number of matches would be harder.
   // See: https://stackoverflow.com/questions/37003623/how-to-capture-multiple-repeated-groups#comment92235723_37004214
   const emojiRegexPattern = '(?::([\\w+]+):)?[^:]*'

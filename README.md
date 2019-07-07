@@ -27,14 +27,28 @@
 * [deox](https://deox.js.org/) to DRY up Redux
 * [blueprintjs](https://blueprintjs.com/) for layout/styling
 
-## Notes on interaction between `redux-cablecar` and `deox`
+## Notes on interaction between `deox` and `redux-cablecar`
 
 * Actions prefixed with `SERVER_REQ` are automatically dispatched to ActionCable via `redux-cablecar`
 * Actions prefixed with `SERVER_RESP` are responses from ActionCable.  They will have
   action creator executors defined via `deox`, but these executors are ***never invoked***,
   because they are handled by `redux-cablecar`.  However, they are still *defined*, in
   order to declare the types used in the corresponding reducers.  There may be a
-  cleaner/better way to do this... 
+  cleaner/better way to do this...
+  
+## Notes on redux payloads in `deox` and `redux-cablecar`
+
+* In the `deox` `createActionCreator` function's `executor` callback which receives
+  a `resolve` callback parameter, the `resolve` callback will automatically wrap the
+  passed payload in a "`payload`" key.  This means that when you process it in a
+  reducer via `handleAction`, you will need to pattern-match out the `payload` key
+  in order to get back the original object you passed to `resolve` in the action
+  creator.
+* ***However***, as mentioned above, action payloads whose dispatch is initiated
+  from the server side via `redux-cablecar` (in `main_channel.rb`) never go through
+  a `deox` action creator executor or resolve method.  Therefore, they do
+  ***NOT*** automatically get their payload wrapped in a `payload` key.  So, for
+  consistency in the reducers, these are manually wrapped in a `payload` key.
 
 # Development
 

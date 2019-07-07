@@ -11,5 +11,5 @@ export const systemReducer = createReducer(defaultState, handleAction => [
   handleAction(cablecarConnected, state => ({...state, connected: true})),
   handleAction(cablecarDisconnected, state => ({...state, connected: false})),
   handleAction(serverReqGetInitialState, _ => _),
-  handleAction(serverRespSetInitialSystemState, (_, {payload: payload}) => payload),
+  handleAction(serverRespSetInitialSystemState, (_, {payload}) => payload),
 ])

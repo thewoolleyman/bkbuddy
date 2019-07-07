@@ -2,7 +2,7 @@ export interface UiState {
   fetchingAllPipelines: boolean,
 }
 
-export const initialState: UiState = {
+export const defaultState: UiState = {
   fetchingAllPipelines: false,
 }
 
