@@ -11,7 +11,7 @@ import {
 import {defaultState} from './state'
 
 export const bkReducer = createReducer(defaultState, handleAction => [
-  handleAction(serverRespSetInitialBkState, (_, {payload}) => payload),
+  handleAction(serverRespSetInitialBkState, (state, {payload: payload}) => ({...state, ...payload})),
   handleAction(emojisFetch.complete, (state, {payload}) => ({...state, emojis: payload})),
   handleAction(pipelinesFetchAll.complete, (state, {payload}) => ({...state, pipelines: payload})),
   handleAction(pipelineFetchSteps.complete, (state, {payload}) => {
