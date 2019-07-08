@@ -6,7 +6,7 @@ function emojiImg(emojiSrc, label, emojiText) {
 
 export function emojiImgsForStep(step, emojis) {
   const label = step.label
-  if (!emojis) {
+  if (!Object.keys(emojis).length) {
     // If emojis URLs are not yet loaded from async call to BK api, return a placeholder image
     return ([emojiImg('https://buildkiteassets.com/emojis/img-apple-64/23f3.png', label, 'loading...')])
   }

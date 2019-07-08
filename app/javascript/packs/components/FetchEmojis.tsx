@@ -2,7 +2,7 @@ import * as React from 'react'
 import {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {emojisFetch, RootState, SystemState} from '~/store'
+import {EmojisFetch, RootState, SystemState} from '~/store'
 
 type AppInitStateProps = {
   system: SystemState,
@@ -15,10 +15,10 @@ type AppInitProps = AppInitStateProps & AppInitDispatchProps
 function AppInit(props: AppInitProps) {
   useEffect(() => {
       if (props.system.bkApiToken) {
-        props.emojisFetch()
+        props.emojisFetchClientAction()
       }
     },
-    [props.system.bkApiToken]);
+    [props.system.bkApiToken])
   return (<div/>)
 }
 
@@ -29,7 +29,7 @@ const mapStateToProps = (state: RootState) => ({
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators(
     {
-      emojisFetch,
+      emojisFetchClientAction: EmojisFetch.clientAction,
     },
     dispatch
   )

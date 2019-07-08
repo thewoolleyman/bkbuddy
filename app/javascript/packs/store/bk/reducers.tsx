@@ -1,20 +1,20 @@
 import {createReducer} from 'deox'
 import {sortPipelines} from '~/util'
 import {
-  emojisFetch,
-  monitoredPipelineCreate,
-  monitoredPipelineDelete,
-  pipelineFetchSteps,
-  pipelinesFetchAll,
-  serverRespSetInitialBkState
+  AllPipelinesFetch,
+  BkStateInitialize,
+  EmojisFetch,
+  MonitoredPipelineCreate,
+  MonitoredPipelineDelete,
+  PipelineStepsFetch
 } from './actions'
 import {defaultState} from './state'
 
 export const bkReducer = createReducer(defaultState, handleAction => [
-  handleAction(serverRespSetInitialBkState, (state, {payload: payload}) => ({...state, ...payload})),
-  handleAction(emojisFetch.complete, (state, {payload}) => ({...state, emojis: payload})),
-  handleAction(pipelinesFetchAll.complete, (state, {payload}) => ({...state, pipelines: payload})),
-  handleAction(pipelineFetchSteps.complete, (state, {payload}) => {
+  handleAction(BkStateInitialize.complete, (state, {payload: payload}) => ({...state, ...payload})),
+  handleAction(EmojisFetch.complete, (state, {payload}) => ({...state, emojis: payload})),
+  handleAction(AllPipelinesFetch.complete, (state, {payload}) => ({...state, pipelines: payload})),
+  handleAction(PipelineStepsFetch.complete, (state, {payload}) => {
     // inefficient nested loop but there shouldn't ever be many steps
     const stateSteps = state.steps
     const newSteps = payload.steps.filter(
@@ -28,12 +28,12 @@ export const bkReducer = createReducer(defaultState, handleAction => [
       steps: state.steps.concat(newSteps)
     })
   }),
-  handleAction(monitoredPipelineCreate.complete, (state, {payload}) =>
+  handleAction(MonitoredPipelineCreate.complete, (state, {payload}) =>
     ({
       ...state,
       monitoredPipelines: sortPipelines([...state.monitoredPipelines, payload.pipeline])
     })),
-  handleAction(monitoredPipelineDelete.complete, (state, {payload}) =>
+  handleAction(MonitoredPipelineDelete.complete, (state, {payload}) =>
     ({
       ...state,
       monitoredPipelines: state.monitoredPipelines.filter((p) => p.slug !== payload.slug),

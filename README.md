@@ -29,8 +29,8 @@
 
 ## Notes on interaction between `deox` and `redux-cablecar`
 
-* Actions prefixed with `SERVER_REQ` are automatically dispatched to ActionCable via `redux-cablecar`
-* Actions prefixed with `SERVER_RESP` are responses from ActionCable.  They will have
+* Actions prefixed with `ServerReq` are automatically dispatched to ActionCable via `redux-cablecar`
+* Actions prefixed with `ServerResp` are responses from ActionCable.  They will have
   action creator executors defined via `deox`, but these executors are ***never invoked***,
   because they are handled by `redux-cablecar`.  However, they are still *defined*, in
   order to declare the types used in the corresponding reducers.  There may be a
@@ -49,8 +49,24 @@
   a `deox` action creator executor or resolve method.  Therefore, they do
   ***NOT*** automatically get their payload wrapped in a `payload` key.  So, for
   consistency in the reducers, these are manually wrapped in a `payload` key.
+  
+## Action Naming Conventions and Patterns
 
-# Development
+These are loosely type-checked in the `ActionLifecycleMap` type.
+
+General pattern:
+`[execution_type]:[action_description]:[action_lifecycle_state]`
+
+Valid constant pattern values:
+`[serverReq|serverResp|<blank>:][model(s)_noun][:action_verb]:[Started|ClientAction|ServerAction|Completed|ServerError|ClientError]`
+
+Examples:
+`ServerReq:InitialSystemStateLoad:ServerAction`
+`ServerResp:pipelineStepsFetch:Complete`
+`PipelinesFetchAll:ClientAction`
+`EmojisFetch:ClientError`  
+
+# Development Setup
 
 * Secrets
   * ***IMPORTANT: NEVER SET A PRODUCTION SECRET VIA `credentials:edit`, E.G. DB PASSWORDS, SENSITIVE API KEYS.  USE ENV VARS!***

@@ -1,3 +1,3 @@
-export {serverReqGetInitialState} from './actions'
+export {SystemStateInitialize} from './actions'
 export {systemReducer} from './reducers'
 export {SystemState} from './state'

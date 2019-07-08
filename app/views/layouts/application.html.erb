@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>bkbuddy - Buildkite Buddy</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>bkbuddy - Buildkite Buddy</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= javascript_pack_tag 'application' %>
-  </head>
+  <%= javascript_pack_tag 'application' %>
+</head>
 
-  <style>
-    body {background-color: #293742}
-  </style>
+<style>
+  body {
+    background-color: #293742
+  }
+</style>
 
-  <body>
-    <!-- not currently using the alert and notice, if needed they will need to be passed into react layout -->
-    <!-- <p class="notice"><%#= notice %></p>-->
-    <!-- <p class="alert"><%#= alert %></p>-->
-    <div>
-      <% unless @user %>
-        <h1>
-          <%=
-            # noinspection RubyResolve
-            link_to "Sign In", user_oktaoauth_omniauth_authorize_path, style: 'color: #AAAAAA'
-          %>
-        </h1>
-      <% end %>
-    </div>
-    <%= yield %>
-  </body>
+<body>
+<!-- not currently using the alert and notice, if needed they will need to be passed into react layout -->
+<!-- <p class="notice"><%#= notice %></p>-->
+<!-- <p class="alert"><%#= alert %></p>-->
+<div>
+  <% unless @user %>
+    <h1>
+      <%=
+        # noinspection RubyResolve
+        link_to "Sign In", user_oktaoauth_omniauth_authorize_path, style: 'color: #AAAAAA'
+      %>
+    </h1>
+  <% end %>
+</div>
+<%= yield %>
+</body>
 </html>

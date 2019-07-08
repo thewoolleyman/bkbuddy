@@ -3,7 +3,7 @@ import cablecar from 'redux-cablecar'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import {rootReducer} from './root'
-import {serverReqGetInitialState} from './system'
+import {SystemStateInitialize} from './system'
 
 export function configureStore() {
   const middlewares = [thunk, cablecar]
@@ -16,10 +16,10 @@ export function configureStore() {
 
   // Connect cablecar to the store
   cablecar.connect(store, 'MainChannel', {
-    prefix: 'SERVER_REQ', // prefix for messages which cablecar will send to server
+    prefix: 'ServerReq', // prefix for messages which cablecar will send to server
     connected: function () {
       // connected callback, sends message to server to get system state
-      store.dispatch({type: serverReqGetInitialState.type})
+      store.dispatch({type: SystemStateInitialize.serverAction.type})
     }
   })
 

@@ -2,7 +2,7 @@ import {Icon, Intent} from '@blueprintjs/core'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {BkState, monitoredPipelineDelete, pipelineFetchSteps, RootState} from '~/store'
+import {BkState, MonitoredPipelineDelete, PipelineStepsFetch, RootState} from '~/store'
 import Steps from '../steps/Steps'
 
 type MonitoredPipelinesStateProps = {
@@ -21,11 +21,11 @@ function MonitoredPipelines(props: MonitoredPipelinesProps) {
           props.bk.monitoredPipelines.map((pipeline) =>
             <li className='monitored-pipeline' key={pipeline.slug}>
               {pipeline.slug} - {pipeline.name} {' '}
-              <a onClick={() => props.pipelineFetchSteps(pipeline.slug)}>
+              <a onClick={() => props.pipelineFetchStepsClientAction(pipeline.slug)}>
                 <Icon className='refreshSteps' icon='refresh' iconSize={16} intent={Intent.NONE}/>
               </a>
               {' '}
-              <a onClick={() => props.monitoredPipelineDelete(pipeline.slug)}>
+              <a onClick={() => props.monitoredPipelineDeleteServerAction(pipeline.slug)}>
                 <Icon className='trashMonitoredPipeline' icon='trash' iconSize={16} intent={Intent.NONE}/>
               </a>
               <Steps pipelineSlug={pipeline.slug}/>
@@ -44,13 +44,12 @@ const mapStateToProps = (state: RootState) => ({
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators(
     {
-      pipelineFetchSteps,
-      monitoredPipelineDelete,
+      pipelineFetchStepsClientAction: PipelineStepsFetch.clientAction,
+      monitoredPipelineDeleteServerAction: MonitoredPipelineDelete.clientAction,
     },
     dispatch
   )
 }
-
 
 export default connect<MonitoredPipelinesStateProps,
   MonitoredPipelinesDispatchProps,

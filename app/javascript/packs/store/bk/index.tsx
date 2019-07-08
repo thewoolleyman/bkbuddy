@@ -1,5 +1,5 @@
 export {
-  pipelinesFetchAll, emojisFetch, pipelineFetchSteps, monitoredPipelineDelete, monitoredPipelineCreate
-}from './actions'
+  AllPipelinesFetch, EmojisFetch, PipelineStepsFetch, MonitoredPipelineDelete, MonitoredPipelineCreate
+} from './actions'
 export {bkReducer} from './reducers'
 export {BkState, Pipeline, Step} from './state'

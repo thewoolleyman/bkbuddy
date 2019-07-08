@@ -26,5 +26,12 @@ class HappySystemTest < ApplicationSystemTestCase
       find('.refreshSteps').click
     end
     assert_selector "li.step", text: "scripts/testing/browser"
+
+    # test error display
+    find('.forceServerError').click
+    assert_selector "div", text: "RuntimeError"
+    find('.forceClientError').click
+    assert_selector "div", text: "TestClientError1"
+    assert_selector "div", text: "TestClientError2"
   end
 end

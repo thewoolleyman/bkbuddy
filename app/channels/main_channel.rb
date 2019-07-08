@@ -9,14 +9,14 @@ class MainChannel < ApplicationCable::Channel
   def receive(action)
     logger.info "CABLECAR SERVER ACTION: #{action['type']}"
 
-    case action["type"]
+    case @action_type = action["type"]
 
-    when "SERVER_REQ_GET_INITIAL_STATE"
+    when "ServerReq:SystemStateInitialize:ServerAction"
       # noinspection RubyResolve
       ActionCable.server.broadcast(
         private_queue,
         {
-          type: "SERVER_RESP_SET_INITIAL_SYSTEM_STATE",
+          type: "ServerResp:SystemStateInitialize:Complete",
           payload: {
             bkApiToken: Rails.application.credentials.BUILDKITE_API_TOKEN!,
             userName: user.fetch(:name),
@@ -28,7 +28,7 @@ class MainChannel < ApplicationCable::Channel
       ActionCable.server.broadcast(
         private_queue,
         {
-          type: "SERVER_RESP_SET_INITIAL_BK_STATE",
+          type: "ServerResp:BkStateInitialize:Complete",
           payload: {
             monitoredPipelines: MonitoredPipeline.order(:name).all,
             steps: camelize_records(Step.order(:id).all)
@@ -36,7 +36,7 @@ class MainChannel < ApplicationCable::Channel
         }
       )
 
-    when "SERVER_REQ_MONITORED_PIPELINE_CREATE"
+    when "ServerReq:MonitoredPipelineCreate:ServerAction"
       payload = action.fetch('payload')
       pipeline = MonitoredPipeline.create!(
         slug: payload.fetch('slug'),
@@ -45,27 +45,27 @@ class MainChannel < ApplicationCable::Channel
       ActionCable.server.broadcast(
         private_queue,
         {
-          type: "SERVER_RESP_MONITORED_PIPELINE_CREATE_COMPLETE",
+          type: "ServerResp:MonitoredPipelineCreate:Complete",
           payload: {
             pipeline: camelize_record(pipeline),
           }
         }
       )
 
-    when "SERVER_REQ_MONITORED_PIPELINE_DELETE"
+    when "ServerReq:MonitoredPipelineDelete:ServerAction"
       slug = action.fetch('payload').fetch('slug')
       MonitoredPipeline.find(slug).destroy!
       ActionCable.server.broadcast(
         private_queue,
         {
-          type: "SERVER_RESP_MONITORED_PIPELINE_DELETE_COMPLETE",
+          type: "ServerResp:MonitoredPipelineDelete:Complete",
           payload: {
             slug: slug,
           }
         }
       )
 
-    when "SERVER_REQ_PIPELINE_FETCH_STEPS"
+    when "ServerReq:PipelineStepsFetch:ServerAction"
       step_from_bk = action.fetch('payload')
       persisted_steps = step_from_bk.map do |step|
         Step.find_by_pipeline_slug_and_command(step.fetch('pipelineSlug'), step.fetch('command')) ||
@@ -79,12 +79,15 @@ class MainChannel < ApplicationCable::Channel
       ActionCable.server.broadcast(
         private_queue,
         {
-          type: "SERVER_RESP_PIPELINE_FETCH_STEPS_COMPLETE",
+          type: "ServerResp:PipelineStepsFetch:Complete",
           payload: {
             steps: camelize_records(persisted_steps),
           }
         }
       )
+
+    when "ServerReq:TestErrorsForce:ServerAction"
+      raise 'Forced server error for use in system integration testing'
 
     else
       raise "Invalid ActionCable action received: '#{action}'"
@@ -96,6 +99,22 @@ class MainChannel < ApplicationCable::Channel
   end
 
   private
+
+  def handle_error(error)
+    error_action_type = @action_type.gsub('ServerReq', 'ServerResp').gsub('ServerAction', 'ServerError')
+    error_hash = {
+      name: error.class.name,
+      message: error.message,
+      stack: error.backtrace&.map(&:to_s).join("\n")
+    }
+    ActionCable.server.broadcast(
+      private_queue,
+      {
+        type: error_action_type,
+        error: error_hash
+      }
+    )
+  end
 
   # noinspection RubyBlockToMethodReference
   def camelize_records(records)
@@ -109,7 +128,7 @@ class MainChannel < ApplicationCable::Channel
   end
 
   def camelize_keys(hash)
-    hash.transform_keys{|key| key.camelize(:lower)}
+    hash.transform_keys {|key| key.camelize(:lower)}
   end
 
   def private_queue

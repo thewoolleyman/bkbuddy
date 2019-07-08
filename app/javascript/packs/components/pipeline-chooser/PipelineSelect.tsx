@@ -3,7 +3,7 @@ import {ItemRenderer, Select} from '@blueprintjs/select'
 import * as React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {BkState, monitoredPipelineCreate, Pipeline, pipelinesFetchAll, RootState, UiState} from '~/store'
+import {AllPipelinesFetch, BkState, MonitoredPipelineCreate, Pipeline, RootState, UiState} from '~/store'
 
 type PipelineSelectStateProps = {
   bk: BkState,
@@ -38,13 +38,13 @@ function PipelineSelect(props: PipelineSelectProps) {
       filterable={false}
       items={unmonitoredPipelines}
       itemRenderer={itemRenderer}
-      onItemSelect={(pipeline: Pipeline) => props.monitoredPipelineCreate(pipeline.slug, pipeline.name)}
+      onItemSelect={(pipeline: Pipeline) => props.monitoredPipelineCreateClientAction(pipeline.slug, pipeline.name)}
       noResults={props.ui.fetchingAllPipelines ? 'fetching...' : 'No available pipelines'}
     >
       <Button
         rightIcon='caret-down'
         text='Select a pipeline to monitor'
-        onClick={!unmonitoredPipelines.length ? props.pipelinesFetchAll : () => null}
+        onClick={!unmonitoredPipelines.length ? props.allPipelinesFetchClientAction : () => null}
       />
     </BpPipelineSelect>
   )
@@ -58,8 +58,8 @@ const mapStateToProps = (state: RootState) => ({
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators(
     {
-      pipelinesFetchAll,
-      monitoredPipelineCreate,
+      allPipelinesFetchClientAction: AllPipelinesFetch.clientAction,
+      monitoredPipelineCreateClientAction: MonitoredPipelineCreate.clientAction,
     },
     dispatch
   )
