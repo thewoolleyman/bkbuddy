@@ -1,5 +1,15 @@
 # BkBuddy
 
+# CURRENT STATUS
+
+Turns out I didn't realize Buildkite already had automatic step-level retries, and Keith Pitt also gave me access to an
+unreleased "retried builds" report.  That was most of what this app was intended to address, so no point in finishing it.
+
+It would be nice to have data on which of the retries are actually a result of flaky builds, but I don't care enough
+to finish this app to do it.
+
+Keeping it around though as it's a nice example of a modern (circa 2019) Rails+React+Redux+Typescript app setup.
+
 # Overview
 
 * Gathers metrics on Buildkite builds/jobs via webhooks
